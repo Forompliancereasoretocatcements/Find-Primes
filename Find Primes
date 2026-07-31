@@ -1,0 +1,11 @@
+def findprimes(num):
+    primes = set()
+    div = 2
+    while num != 1:
+        x = divmod(num, div)
+        if x[1] != 0:
+            div += 1
+        else:
+            primes.add(div)
+            num = x[0]
+    return primes
