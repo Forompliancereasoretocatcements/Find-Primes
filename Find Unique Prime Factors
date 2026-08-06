@@ -1,0 +1,28 @@
+def find_primes_up_to(num):
+    if num < 2:
+        return []
+    nums = [0] * (num - 1)
+    nums[0] = 2
+    p = 2
+    while p ** 2 <= num:
+        for i in range(p ** 2 - 2, num  - 1, p):
+            nums[i] = 1
+        p = nums.index(0) + 2
+        nums[p - 2] = 2
+    return [i + 2 for i in range(num - 1) if nums[i] != 1]
+
+def find_unique_prime_factors(num):
+    primes = find_primes_up_to(round(num ** 0.5))
+    factors = set()
+    x = 0
+    while num > 1:
+        if x >= len(primes):
+            factors.add(num)
+            break
+        dm = divmod(num, primes[x])
+        if dm[1] > 0:
+            x += 1
+        else:
+            factors.add(primes[x])
+            num = dm[0]
+    return factors
