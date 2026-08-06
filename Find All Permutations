@@ -1,0 +1,9 @@
+def find_all_possible_permutations(nums):
+    if len(nums) < 2:
+        return [nums]
+    permutations = []
+    for num in nums:
+        numscopy = nums.copy()
+        numscopy.remove(num)
+        permutations.extend([[num] + i for i in find_all_possible_permutations(numscopy)])
+    return permutations
